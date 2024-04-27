@@ -1,0 +1,53 @@
+@if (paper) {
+<div class="paper-item">
+  <div class="header">
+    <div>
+      <h3>
+        @if (paper.yearPublished){({{ paper.yearPublished }})} {{ paper.title }}
+      </h3>
+      @if (paper.authors.length) {
+      <div class="authors">
+        {{ paper.authors | authorArray }}
+      </div>
+      }
+    </div>
+    @if (thumbnailLink) {
+    <div class="thumbnail">
+      <img [src]="thumbnailLink" alt="Thumbnail" />
+    </div>
+    }
+  </div>
+  <div class="abstract">
+    <h4>Abstract:</h4>
+    <p>{{ paper.abstract }}</p>
+  </div>
+
+  <!-- <div class="links">
+      <h4>Links:</h4>
+      <ul>
+        <li *ngFor="let link of paper.links">
+          <a [href]="link.url" target="_blank">{{ link.type }}</a>
+        </li>
+      </ul>
+    </div> -->
+  @if (paper.publishedDate) {
+
+  <div class="published-date">
+    <span
+      >Published @if (paper.publisher) {
+      <span class="publisher"> by {{ paper.publisher }} </span>
+      } on {{ paper.publishedDate | date }}</span
+    >
+    <span class="tags">
+      <span class="language">{{ paper.language.name }}</span>
+      @if (paper.documentType) {
+
+      <span class="document-type">
+        {{ paper.documentType | titlecase }}
+      </span>
+      }
+    </span>
+  </div>
+  }
+</div>
+}

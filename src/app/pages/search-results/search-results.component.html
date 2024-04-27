@@ -1,0 +1,34 @@
+<div class="controls">
+  <a routerLink="/"><img src="assets/logo-hz.png" alt="PaperView logo" /></a>
+  <div class="search">
+    <input
+      type="text"
+      (ngModelChange)="searchService.searchInput.set($event)"
+      [ngModel]="searchService.searchInput()"
+      (keydown.enter)="onSearch()"
+    />
+    <button (click)="onSearch()">
+      <pv-search-icon size="small"></pv-search-icon>Search
+    </button>
+  </div>
+
+  <select
+    [ngModel]="searchService.numPapers()"
+    (ngModelChange)="searchService.numPapers.set($event)"
+  >
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="50">50</option>
+  </select>
+  <span class="results">results per page</span>
+</div>
+@if (searchService.results().length) {
+<h2>Search results ({{ searchService.results().length }})</h2>
+<div class="paper-list">
+  @for (paper of searchService.results(); track paper.id) {
+  <pv-result-card [paper]="paper"></pv-result-card>
+  }
+</div>
+} @else {
+<h2>Searching...</h2>
+}

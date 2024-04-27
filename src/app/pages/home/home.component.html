@@ -1,0 +1,22 @@
+<div class="content">
+  <pv-logo />
+  <div>
+    <h1>Discover and explore academic papers easily with PaperView.</h1>
+    <label>
+      <input
+        type="text"
+        placeholder="Type to search..."
+        [ngModel]="searchInput()"
+        (ngModelChange)="searchInput.set($event)"
+        (keydown.enter)="navigateToSearch()"
+      />
+      <a
+        routerLink="/search"
+        [queryParams]="{ q: searchInput() }"
+        class="search-button"
+      >
+        <pv-search-icon size="large" />
+      </a>
+    </label>
+  </div>
+</div>
