@@ -20,14 +20,17 @@
     <option value="20">20</option>
     <option value="50">50</option>
   </select>
-  <span class="results">results per page</span>
+  <span class="results-label">results per page</span>
 </div>
 @if (searchService.results().length) {
 <h2>Search results ({{ searchService.results().length }})</h2>
-<div class="paper-list">
-  @for (paper of searchService.results(); track paper.id) {
-  <pv-result-card [paper]="paper"></pv-result-card>
-  }
+<div class="results">
+  <div class="paper-list">
+    @for (paper of searchService.results(); track paper.id) {
+    <pv-result-card [paper]="paper" [keywords]="keywords"></pv-result-card>
+    }
+  </div>
+  <pv-keyword-chart [keywordData]="keywordData"></pv-keyword-chart>
 </div>
 } @else {
 <h2>Searching...</h2>

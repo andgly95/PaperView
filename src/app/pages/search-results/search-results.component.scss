@@ -9,6 +9,7 @@
   .controls {
     display: flex;
     align-items: center;
+
     img {
       height: 64px;
       margin-right: 16px;
@@ -50,7 +51,7 @@
       border-radius: 16px;
       margin-left: auto;
     }
-    .results {
+    .results-label {
       color: white;
       margin-left: 16px;
     }
@@ -60,18 +61,19 @@
     color: white;
     margin-bottom: 0;
   }
-
   .paper-list {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: row;
 
-    @media screen and (max-width: 1440px) {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
       grid-template-columns: 1fr;
     }
+  }
+  .results {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 2fr 1fr;
   }
 }

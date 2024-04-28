@@ -3,7 +3,8 @@
   <div class="header">
     <div>
       <h3>
-        @if (paper.yearPublished){({{ paper.yearPublished }})} {{ paper.title }}
+        @if (paper.yearPublished){({{ paper.yearPublished }}) }
+        <span [innerHTML]="paper.title | highlight : keywords"></span>
       </h3>
       @if (paper.authors.length) {
       <div class="authors">
@@ -19,7 +20,7 @@
   </div>
   <div class="abstract">
     <h4>Abstract:</h4>
-    <p>{{ paper.abstract }}</p>
+    <p [innerHTML]="paper.abstract | highlight : keywords"></p>
   </div>
 
   <!-- <div class="links">
@@ -39,9 +40,9 @@
       } on {{ paper.publishedDate | date }}</span
     >
     <span class="tags">
+      @if (paper.language) {
       <span class="language">{{ paper.language.name }}</span>
-      @if (paper.documentType) {
-
+      } @if (paper.documentType) {
       <span class="document-type">
         {{ paper.documentType | titlecase }}
       </span>
