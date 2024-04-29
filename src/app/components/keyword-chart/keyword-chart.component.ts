@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 
 @Component({
@@ -10,9 +16,7 @@ import { Chart, registerables } from 'chart.js';
       <canvas id="keywordChart"></canvas>
     </div>
   `,
-  styles: [
-    'canvas { background: white; padding: 1rem; border-radius: 0.5rem; }',
-  ],
+  styles: ['canvas { background: white; padding: 16px; border-radius: 10px; }'],
 })
 export class KeywordChartComponent implements OnChanges {
   @Input() keywordData: { keyword: string; count: number }[] = [];
@@ -22,6 +26,14 @@ export class KeywordChartComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['keywordData']) {
       this.updateChart();
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    if (this.chart) {
+      this.chart.resize(0);
+      this.chart.resize();
     }
   }
 
@@ -45,6 +57,7 @@ export class KeywordChartComponent implements OnChanges {
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           scales: {
             y: {
               beginAtZero: true,

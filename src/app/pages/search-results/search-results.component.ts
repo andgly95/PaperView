@@ -1,4 +1,3 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { SearchService } from '../../services/search.service';
 import { FormsModule } from '@angular/forms';
@@ -8,14 +7,13 @@ import { SearchIconComponent } from '../../components/search-icon/search-icon.co
 import { KeywordChartComponent } from '../../components/keyword-chart/keyword-chart.component';
 import { Result } from '../../interfaces';
 import { LogoComponent } from '../../components/logo/logo.component';
+import { SearchHeaderComponent } from '../../components/search-header/search-header.component';
 
 @Component({
   selector: 'pv-search-results',
   standalone: true,
   imports: [
-    FormsModule,
-    RouterModule,
-    LogoComponent,
+    SearchHeaderComponent,
     ResultCardComponent,
     SearchIconComponent,
     KeywordChartComponent,
@@ -29,7 +27,6 @@ export class SearchResultsComponent {
 
   constructor(
     public searchService: SearchService,
-    private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -40,14 +37,6 @@ export class SearchResultsComponent {
     this.activatedRoute.data.subscribe((data) => {
       this.searchService.results.set(data['searchResults']);
       this.updateKeywordChart();
-    });
-  }
-
-  onSearch(): void {
-    this.router.navigate([], {
-      relativeTo: this.activatedRoute,
-      queryParams: { q: this.searchService.searchInput() },
-      queryParamsHandling: 'merge',
     });
   }
 
