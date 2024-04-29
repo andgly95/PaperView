@@ -1,26 +1,30 @@
 <div class="controls">
-  <a routerLink="/"><img src="assets/logo-hz.png" alt="PaperView logo" /></a>
-  <div class="search">
-    <input
-      type="text"
-      (ngModelChange)="searchService.searchInput.set($event)"
-      [ngModel]="searchService.searchInput()"
-      (keydown.enter)="onSearch()"
-    />
-    <button (click)="onSearch()">
-      <pv-search-icon size="small"></pv-search-icon>Search
-    </button>
+  <div class="left">
+    <a routerLink="/"><pv-logo size="sm" /></a>
+    <div class="search">
+      <input
+        type="text"
+        (ngModelChange)="searchService.searchInput.set($event)"
+        [ngModel]="searchService.searchInput()"
+        (keydown.enter)="onSearch()"
+      />
+      <button (click)="onSearch()">
+        <pv-search-icon size="small"></pv-search-icon>Search
+      </button>
+    </div>
   </div>
 
-  <select
-    [ngModel]="searchService.numPapers()"
-    (ngModelChange)="searchService.numPapers.set($event)"
-  >
-    <option value="10">10</option>
-    <option value="20">20</option>
-    <option value="50">50</option>
-  </select>
-  <span class="results-label">results per page</span>
+  <div class="right">
+    <select
+      [ngModel]="searchService.numPapers()"
+      (ngModelChange)="searchService.numPapers.set($event)"
+    >
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+    </select>
+    <span class="results-label">results per page</span>
+  </div>
 </div>
 @if (searchService.results().length) {
 <h2>Search results ({{ searchService.results().length }})</h2>

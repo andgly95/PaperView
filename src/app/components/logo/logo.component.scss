@@ -1,16 +1,25 @@
-img {
-  width: 100%;
-  height: 100%;
-}
-@media (max-width: 1440px) {
-  img {
-    width: 512px;
-    height: 512px;
+:host {
+  &.sm {
+    img {
+      height: 64px;
+    }
   }
-}
-@media (max-width: 768px) {
-  img {
-    width: 256px;
-    height: 256px;
+  &.lg {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    @media (max-width: 1440px) {
+      img {
+        width: 512px;
+        height: 512px;
+      }
+    }
+    @media (max-width: 768px) {
+      img {
+        width: 256px;
+        height: 256px;
+      }
+    }
   }
 }

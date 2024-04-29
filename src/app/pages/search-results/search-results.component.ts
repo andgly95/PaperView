@@ -7,16 +7,15 @@ import { ResultCardComponent } from '../../components/result-card/result-card.co
 import { SearchIconComponent } from '../../components/search-icon/search-icon.component';
 import { KeywordChartComponent } from '../../components/keyword-chart/keyword-chart.component';
 import { Result } from '../../interfaces';
+import { LogoComponent } from '../../components/logo/logo.component';
 
 @Component({
   selector: 'pv-search-results',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    AsyncPipe,
     FormsModule,
     RouterModule,
+    LogoComponent,
     ResultCardComponent,
     SearchIconComponent,
     KeywordChartComponent,

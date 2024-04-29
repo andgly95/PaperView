@@ -9,11 +9,19 @@
   .controls {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 8px;
 
-    img {
-      height: 64px;
-      margin-right: 16px;
+    .left,
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
+
     .search {
       display: flex;
       align-items: center;
@@ -53,7 +61,6 @@
     }
     .results-label {
       color: white;
-      margin-left: 16px;
     }
   }
 
@@ -75,5 +82,11 @@
     display: grid;
     grid-gap: 20px;
     grid-template-columns: 2fr 1fr;
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+      pv-keyword-chart {
+        order: -1;
+      }
+    }
   }
 }

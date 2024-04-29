@@ -12,7 +12,7 @@ import { HighlightPipe } from '../../pipes/highlight.pipe';
   styleUrl: './result-card.component.scss',
 })
 export class ResultCardComponent {
-  @Input() paper?: Result;
+  @Input() paper!: Result;
   @Input() keywords: string[] = [];
 
   get thumbnailLink(): string | undefined {

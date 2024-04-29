@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'pv-logo',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './logo.component.html',
   styleUrl: './logo.component.scss',
 })
-export class LogoComponent {}
+export class LogoComponent {
+  @Input() @HostBinding('class') size: 'sm' | 'lg' = 'lg';
+
+  get src(): string {
+    return `assets/logo-${this.size}.png`;
+  }
+}

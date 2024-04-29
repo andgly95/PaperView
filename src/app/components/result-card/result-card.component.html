@@ -1,29 +1,26 @@
-@if (paper) {
-<div class="paper-item">
-  <div class="header">
-    <div>
-      <h3>
-        @if (paper.yearPublished){({{ paper.yearPublished }}) }
-        <span [innerHTML]="paper.title | highlight : keywords"></span>
-      </h3>
-      @if (paper.authors.length) {
-      <div class="authors">
-        {{ paper.authors | authorArray }}
-      </div>
-      }
-    </div>
-    @if (thumbnailLink) {
-    <div class="thumbnail">
-      <img [src]="thumbnailLink" alt="Thumbnail" />
+<div class="header">
+  <div>
+    <h3>
+      @if (paper.yearPublished){({{ paper.yearPublished }}) }
+      <span [innerHTML]="paper.title | highlight : keywords"></span>
+    </h3>
+    @if (paper.authors.length) {
+    <div class="authors">
+      {{ paper.authors | authorArray }}
     </div>
     }
   </div>
-  <div class="abstract">
-    <h4>Abstract:</h4>
-    <p [innerHTML]="paper.abstract | highlight : keywords"></p>
+  @if (thumbnailLink) {
+  <div class="thumbnail">
+    <img [src]="thumbnailLink" alt="Thumbnail" />
   </div>
+  }
+</div>
+<div>
+  <p class="abstract" [innerHTML]="paper.abstract | highlight : keywords"></p>
+</div>
 
-  <!-- <div class="links">
+<!-- <div class="links">
       <h4>Links:</h4>
       <ul>
         <li *ngFor="let link of paper.links">
@@ -31,24 +28,22 @@
         </li>
       </ul>
     </div> -->
-  @if (paper.publishedDate) {
+@if (paper.publishedDate) {
 
-  <div class="published-date">
-    <span
-      >Published @if (paper.publisher) {
-      <span class="publisher"> by {{ paper.publisher }} </span>
-      } on {{ paper.publishedDate | date }}</span
-    >
-    <span class="tags">
-      @if (paper.language) {
-      <span class="language">{{ paper.language.name }}</span>
-      } @if (paper.documentType) {
-      <span class="document-type">
-        {{ paper.documentType | titlecase }}
-      </span>
-      }
+<div class="published-date">
+  <span
+    >Published @if (paper.publisher) {
+    <span class="publisher"> by {{ paper.publisher }} </span>
+    } on {{ paper.publishedDate | date }}</span
+  >
+  <span class="tags">
+    @if (paper.language) {
+    <span class="language">{{ paper.language.name }}</span>
+    } @if (paper.documentType) {
+    <span class="document-type">
+      {{ paper.documentType | titlecase }}
     </span>
-  </div>
-  }
+    }
+  </span>
 </div>
 }
