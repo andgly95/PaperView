@@ -12,12 +12,12 @@ import { Chart, registerables } from 'chart.js';
   standalone: true,
   imports: [],
   template: `
-    <div>
-      <canvas id="keywordChart"></canvas>
+    <div style="width: 100%; position: relative">
+      <canvas id="keywordChart" style="max-width: 100%"></canvas>
     </div>
   `,
   styles: [
-    'div { min-height: 300px; width: 100%; }; canvas { background: white; padding: 16px; border-radius: 10px; }',
+    ':host { overflow: auto; } div { min-height: 300px; }; canvas { background: white; padding: 16px; border-radius: 10px; }',
   ],
 })
 export class KeywordChartComponent implements OnChanges {
