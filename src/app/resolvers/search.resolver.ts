@@ -9,7 +9,11 @@ export class SearchResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const searchTerm = route.queryParams['q'];
+    const limit = route.queryParams['limit'];
     this.searchService.searchInput.set(searchTerm);
+    if (limit) {
+      this.searchService.numPapers.set(parseInt(limit, 10));
+    }
     return this.searchService.searchPapers();
   }
 }
