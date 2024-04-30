@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Author } from '../interfaces';
+import { Author } from '../interfaces/api.interfaces';
 
 @Pipe({
   name: 'authorArray',

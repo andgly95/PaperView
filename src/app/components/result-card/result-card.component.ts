@@ -6,7 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { Result } from '../../interfaces';
+import { Result } from '../../interfaces/api.interfaces';
 import { DatePipe, TitleCasePipe } from '@angular/common';
 import { AuthorArrayPipe } from '../../pipes/author-array.pipe';
 import { HighlightPipe } from '../../pipes/highlight.pipe';

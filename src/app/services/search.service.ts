@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Result } from '../interfaces';
+import { Result } from '../interfaces/api.interfaces';
 import { CoreApiService } from './core-api.service';
 
 @Injectable({

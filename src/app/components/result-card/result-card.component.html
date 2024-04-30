@@ -25,8 +25,8 @@
 <div class="published-date">
   <span
     >Published @if (paper.publisher) {
-    <span class="publisher"> by {{ paper.publisher }} </span>
-    } on {{ paper.publishedDate | date }}</span
+    <span class="publisher">by {{ paper.publisher }} </span>
+    }on {{ paper.publishedDate | date }}</span
   >
   <span class="actions">
     @if (getLinkUrl('download'); as downloadLink) {

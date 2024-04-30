@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ResultCardComponent } from '../../components/result-card/result-card.component';
 import { SearchIconComponent } from '../../components/icons/search-icon/search-icon.component';
 import { KeywordChartComponent } from '../../components/keyword-chart/keyword-chart.component';
-import { Result } from '../../interfaces';
+import { Result } from '../../interfaces/api.interfaces';
 import { SearchHeaderComponent } from '../../components/search-header/search-header.component';
 import keyword_extractor from 'keyword-extractor';
 
