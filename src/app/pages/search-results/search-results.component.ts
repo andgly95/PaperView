@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { SearchService } from '../../services/search.service';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ResultCardComponent } from '../../components/result-card/result-card.component';
-import { SearchIconComponent } from '../../components/search-icon/search-icon.component';
+import { SearchIconComponent } from '../../components/icons/search-icon/search-icon.component';
 import { KeywordChartComponent } from '../../components/keyword-chart/keyword-chart.component';
 import { Result } from '../../interfaces';
-import { LogoComponent } from '../../components/logo/logo.component';
 import { SearchHeaderComponent } from '../../components/search-header/search-header.component';
+import keyword_extractor from 'keyword-extractor';
 
 @Component({
   selector: 'pv-search-results',
@@ -24,6 +23,7 @@ import { SearchHeaderComponent } from '../../components/search-header/search-hea
 export class SearchResultsComponent {
   keywords: string[] = [];
   keywordData: { keyword: string; count: number }[] = [];
+  selectedPaperKeywordData: { keyword: string; count: number }[] = [];
 
   constructor(
     public searchService: SearchService,
@@ -38,6 +38,21 @@ export class SearchResultsComponent {
       this.searchService.results.set(data['searchResults']);
       this.updateKeywordChart();
     });
+  }
+
+  onPaperHovered(paper: Result) {
+    this.selectedPaperKeywordData = this.extractKeywords(
+      [paper],
+      this.searchService.searchInput()
+    );
+    console.log(this.selectedPaperKeywordData);
+  }
+
+  onPaperClicked(paper: Result) {
+    this.selectedPaperKeywordData = this.extractKeywords(
+      [paper],
+      this.searchService.searchInput()
+    );
   }
 
   private updateKeywordChart(): void {
@@ -57,32 +72,42 @@ export class SearchResultsComponent {
     papers: Result[],
     query: string
   ): { keyword: string; count: number }[] {
-    const keywords = query.split(' ').map((keyword) => keyword.toLowerCase());
+    const queryKeywords = keyword_extractor.extract(query, {
+      language: 'english',
+      remove_digits: true,
+      return_changed_case: true,
+      remove_duplicates: true,
+    });
+
     const keywordCounts: { [keyword: string]: number } = {};
 
-    papers.forEach((paper) => {
-      const titleKeywords = this.extractKeywordsFromText(paper.title, keywords);
-      const abstractKeywords = this.extractKeywordsFromText(
-        paper.abstract,
-        keywords
-      );
+    queryKeywords.forEach((keyword) => {
+      let count = 0;
 
-      titleKeywords.forEach((keyword) => {
-        keywordCounts[keyword] = (keywordCounts[keyword] || 0) + 1;
+      papers.forEach((paper) => {
+        const extractKeywordsFromText = (text: string | null | undefined) => {
+          if (text) {
+            return text
+              .split(/\s+/)
+              .filter((word) =>
+                keyword.toLowerCase().includes(word.toLowerCase())
+              );
+          }
+          return [];
+        };
+
+        const titleKeywords = extractKeywordsFromText(paper.title);
+        const abstractKeywords = extractKeywordsFromText(paper.abstract);
+
+        count += titleKeywords.length + abstractKeywords.length;
       });
 
-      abstractKeywords.forEach((keyword) => {
-        keywordCounts[keyword] = (keywordCounts[keyword] || 0) + 1;
-      });
+      keywordCounts[keyword] = count;
     });
 
     return Object.entries(keywordCounts).map(([keyword, count]) => ({
       keyword,
       count,
     }));
-  }
-
-  private extractKeywordsFromText(text: string, keywords: string[]): string[] {
-    return keywords.filter((keyword) => text?.toLowerCase().includes(keyword));
   }
 }

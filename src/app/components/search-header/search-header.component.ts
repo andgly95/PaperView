@@ -5,7 +5,7 @@ import { SearchService } from '../../services/search.service';
 import { KeywordChartComponent } from '../keyword-chart/keyword-chart.component';
 import { LogoComponent } from '../logo/logo.component';
 import { ResultCardComponent } from '../result-card/result-card.component';
-import { SearchIconComponent } from '../search-icon/search-icon.component';
+import { SearchIconComponent } from '../icons/search-icon/search-icon.component';
 
 @Component({
   selector: 'pv-search-header',
@@ -39,7 +39,10 @@ export class SearchHeaderComponent {
   onSearch(): void {
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
-      queryParams: { q: this.searchService.searchInput() },
+      queryParams: {
+        q: this.searchService.searchInput(),
+        limit: this.searchService.numPapers(),
+      },
       queryParamsHandling: 'merge',
     });
   }

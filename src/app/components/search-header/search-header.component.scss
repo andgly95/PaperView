@@ -1,3 +1,5 @@
+@import "../../styles/variables/colors";
+
 :host {
   display: flex;
   align-items: center;
@@ -39,7 +41,7 @@
     cursor: pointer;
     border: none;
     border-radius: 40px;
-    background-color: #ffb800;
+    background-color: $accent;
     pv-search-icon {
       display: inline-flex;
       margin-left: -6px;

@@ -16,7 +16,7 @@
 <div class="right">
   <select
     [ngModel]="searchService.numPapers()"
-    (ngModelChange)="searchService.numPapers.set($event)"
+    (ngModelChange)="searchService.numPapers.set($event); onSearch()"
   >
     <option value="10">10</option>
     <option value="20">20</option>

@@ -2,7 +2,6 @@ import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Result } from '../interfaces';
 import { CoreApiService } from './core-api.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',

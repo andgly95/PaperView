@@ -4,10 +4,18 @@
 <div class="results">
   <div class="paper-list">
     @for (paper of searchService.results(); track paper.id) {
-    <pv-result-card [paper]="paper" [keywords]="keywords"></pv-result-card>
+    <pv-result-card
+      [paper]="paper"
+      [keywords]="keywords"
+      (hovered)="onPaperHovered($event)"
+      (clicked)="onPaperClicked($event)"
+    ></pv-result-card>
     }
   </div>
-  <pv-keyword-chart [keywordData]="keywordData"></pv-keyword-chart>
+  <pv-keyword-chart
+    [keywordData]="keywordData"
+    [selectedPaperKeywordData]="selectedPaperKeywordData"
+  ></pv-keyword-chart>
 </div>
 } @else {
 <h2>Searching...</h2>

@@ -20,11 +20,11 @@ import { Chart, registerables } from 'chart.js';
 })
 export class KeywordChartComponent implements OnChanges {
   @Input() keywordData: { keyword: string; count: number }[] = [];
-
+  @Input() selectedPaperKeywordData: { keyword: string; count: number }[] = [];
   private chart: Chart | null = null;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['keywordData']) {
+    if (changes['keywordData'] || changes['selectedPaperKeywordData']) {
       this.updateChart();
     }
   }
@@ -33,7 +33,6 @@ export class KeywordChartComponent implements OnChanges {
   onResize(event: Event) {
     if (this.chart) {
       this.chart.resize(0);
-      this.chart.resize();
     }
   }
 
@@ -47,10 +46,17 @@ export class KeywordChartComponent implements OnChanges {
           labels: [],
           datasets: [
             {
-              label: 'Occurrences in title or abstract',
+              label: 'Occurrences in all papers',
               data: [],
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.5)',
+              borderColor: '#f5a623',
+              backgroundColor: '#f5a62320',
+              borderWidth: 1,
+            },
+            {
+              label: 'Occurrences in selected paper',
+              data: [],
+              borderColor: '#007bff',
+              backgroundColor: '#007bff20',
               borderWidth: 1,
             },
           ],
@@ -81,10 +87,12 @@ export class KeywordChartComponent implements OnChanges {
     if (!this.chart) {
       this.initializeChart();
     }
-
     if (this.chart) {
       this.chart.data.labels = this.keywordData.map((item) => item.keyword);
       this.chart.data.datasets[0].data = this.keywordData.map(
+        (item) => item.count
+      );
+      this.chart.data.datasets[1].data = this.selectedPaperKeywordData.map(
         (item) => item.count
       );
       this.chart.update();
