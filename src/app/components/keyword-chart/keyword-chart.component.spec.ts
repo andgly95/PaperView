@@ -65,13 +65,6 @@ describe('KeywordChartComponent', () => {
     expect((component as any).updateChart).toHaveBeenCalled();
   });
 
-  it('should resize the chart on window resize event', () => {
-    const chartMock = jasmine.createSpyObj('Chart', ['resize']);
-    (component as any).chart = chartMock;
-    component.onResize(new Event('resize'));
-    expect(chartMock.resize).toHaveBeenCalledWith(0);
-  });
-
   it('should update the chart data and labels correctly', () => {
     const updateSpy = jasmine.createSpy('update');
     const chartMock = jasmine.createSpyObj('Chart', ['update']);

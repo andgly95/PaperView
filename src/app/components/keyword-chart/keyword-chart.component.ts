@@ -1,10 +1,4 @@
-import {
-  Component,
-  HostListener,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 
 @Component({
@@ -28,13 +22,6 @@ export class KeywordChartComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['keywordData'] || changes['selectedPaperKeywordData']) {
       this.updateChart();
-    }
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    if (this.chart) {
-      this.chart.resize(0);
     }
   }
 
