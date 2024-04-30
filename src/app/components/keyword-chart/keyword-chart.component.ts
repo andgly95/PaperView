@@ -16,7 +16,9 @@ import { Chart, registerables } from 'chart.js';
       <canvas id="keywordChart"></canvas>
     </div>
   `,
-  styles: ['canvas { background: white; padding: 16px; border-radius: 10px; }'],
+  styles: [
+    'div { min-height: 300px; width: 100%; }; canvas { background: white; padding: 16px; border-radius: 10px; }',
+  ],
 })
 export class KeywordChartComponent implements OnChanges {
   @Input() keywordData: { keyword: string; count: number }[] = [];
@@ -55,8 +57,8 @@ export class KeywordChartComponent implements OnChanges {
             {
               label: 'Occurrences in selected paper',
               data: [],
-              borderColor: '#007bff',
-              backgroundColor: '#007bff20',
+              borderColor: '#1d3149',
+              backgroundColor: '#1d314920',
               borderWidth: 1,
             },
           ],
