@@ -6,15 +6,15 @@
     @for (paper of searchService.results(); track paper.id) {
     <pv-result-card
       [paper]="paper"
-      [keywords]="keywords"
+      [keywords]="keywords()"
       (hovered)="onPaperHovered($event)"
       (clicked)="onPaperClicked($event)"
     ></pv-result-card>
     }
   </div>
   <pv-keyword-chart
-    [keywordData]="keywordData"
-    [selectedPaperKeywordData]="selectedPaperKeywordData"
+    [keywordData]="keywordData()"
+    [selectedPaperKeywordData]="selectedPaperKeywordData()"
   ></pv-keyword-chart>
 </div>
 } @else {

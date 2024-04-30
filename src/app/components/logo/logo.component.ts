@@ -8,9 +8,9 @@ import { Component, HostBinding, Input } from '@angular/core';
   styleUrl: './logo.component.scss',
 })
 export class LogoComponent {
-  @Input() @HostBinding('class') size: 'sm' | 'lg' = 'lg';
+  @Input() @HostBinding('class') size?: 'sm' | 'lg' = 'lg';
 
   get src(): string {
-    return `assets/logo-${this.size}.png`;
+    return `assets/images/logo-${this.size}.png`;
   }
 }
