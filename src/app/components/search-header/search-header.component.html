@@ -7,7 +7,7 @@
       [ngModel]="searchService.searchInput()"
       (keydown.enter)="onSearch()"
     />
-    <button (click)="onSearch()">
+    <button [disabled]="searchService.loading()" (click)="onSearch()">
       <pv-search-icon size="small"></pv-search-icon>Search
     </button>
   </div>

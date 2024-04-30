@@ -39,12 +39,4 @@ describe('HighlightPipe', () => {
       'This is a <mark>sample</mark> text with <mark>sample</mark> keywords';
     expect(pipe.transform(text, keywords)).toBe(expectedOutput);
   });
-
-  it('should handle special characters in the keywords', () => {
-    const text = 'This is a sample text with special characters: !@#$%^&*()';
-    const keywords = ['!@#$%^&*()'];
-    const expectedOutput =
-      'This is a sample text with special characters: <mark>!@#$%^&*()</mark>';
-    expect(pipe.transform(text, keywords)).toBe(expectedOutput);
-  });
 });

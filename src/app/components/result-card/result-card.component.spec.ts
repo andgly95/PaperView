@@ -16,7 +16,11 @@ describe('ResultCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ResultCardComponent);
     component = fixture.componentInstance;
-    component.paper = stubPaper;
+    component.paper = {
+      ...stubPaper,
+      title: 'Test Paper',
+      authors: [{ name: 'Author 1' }, { name: 'Author 2' }],
+    };
     fixture.detectChanges();
   });
 

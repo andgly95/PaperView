@@ -6,13 +6,13 @@
       <input
         type="text"
         placeholder="Type to search..."
-        [ngModel]="searchInput()"
-        (ngModelChange)="searchInput.set($event)"
+        [ngModel]="searchService.searchInput()"
+        (ngModelChange)="searchService.searchInput.set($event)"
         (keydown.enter)="navigateToSearch()"
       />
       <a
         routerLink="/search"
-        [queryParams]="{ q: searchInput() }"
+        [queryParams]="{ q: searchService.searchInput() }"
         class="search-button"
       >
         <pv-search-icon size="large" />

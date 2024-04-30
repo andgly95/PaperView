@@ -30,20 +30,20 @@ describe('LogoComponent', () => {
   });
 
   it('should set the correct src for the logo image', () => {
-    expect(component.src).toBe('assets/logo-lg.png');
+    expect(component.src).toBe('assets/images/logo-lg.png');
   });
 
   it('should update the size and src when input changes', () => {
     component.size = 'sm';
     fixture.detectChanges();
     expect(fixture.nativeElement.classList).toContain('sm');
-    expect(component.src).toBe('assets/logo-sm.png');
+    expect(component.src).toBe('assets/images/logo-sm.png');
   });
 
   it('should have an img element with the correct src and alt attributes', () => {
     const imgElement = fixture.nativeElement.querySelector('img');
     expect(imgElement).toBeTruthy();
-    expect(imgElement.getAttribute('src')).toBe('assets/logo-lg.png');
+    expect(imgElement.getAttribute('src')).toBe('assets/images/logo-lg.png');
     expect(imgElement.getAttribute('alt')).toBe('PaperView logo');
   });
 });

@@ -21,7 +21,12 @@ describe('AuthorArrayPipe', () => {
     expect(pipe.transform(authors)).toBe('By John Doe');
   });
 
-  it('should return the author names joined by "and" when the input has multiple authors', () => {
+  it('should return the author names joined by "and" when the input has two authors', () => {
+    const authors: Author[] = [{ name: 'John Doe' }, { name: 'Jane Smith' }];
+    expect(pipe.transform(authors)).toBe('By John Doe and Jane Smith');
+  });
+
+  it('should return the author names joined by commas and "and" when the input has multiple authors', () => {
     const authors: Author[] = [
       { name: 'John Doe' },
       { name: 'Jane Smith' },

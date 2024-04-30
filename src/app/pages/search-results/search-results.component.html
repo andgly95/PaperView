@@ -1,22 +1,24 @@
 <pv-search-header></pv-search-header>
-@if (searchService.results().length) {
+@if (!searchService.loading() && searchService.results().length) {
 <h2>Search results ({{ searchService.results().length }})</h2>
 <div class="results">
   <div class="paper-list">
     @for (paper of searchService.results(); track paper.id) {
     <pv-result-card
       [paper]="paper"
-      [keywords]="keywords()"
+      [keywords]="keywordService.keywords()"
       (hovered)="onPaperHovered($event)"
       (clicked)="onPaperClicked($event)"
     ></pv-result-card>
     }
   </div>
   <pv-keyword-chart
-    [keywordData]="keywordData()"
-    [selectedPaperKeywordData]="selectedPaperKeywordData()"
+    [keywordData]="keywordService.keywordData()"
+    [selectedPaperKeywordData]="keywordService.selectedPaperKeywordData()"
   ></pv-keyword-chart>
 </div>
-} @else {
+} @else if (searchService.loading()) {
 <h2>Searching...</h2>
+} @else {
+<h2>No results found</h2>
 }

@@ -1,8 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { LogoComponent } from '../../components/logo/logo.component';
 import { SearchIconComponent } from '../../components/icons/search-icon/search-icon.component';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'pv-home',
@@ -13,12 +14,11 @@ import { SearchIconComponent } from '../../components/icons/search-icon/search-i
 })
 export class HomeComponent {
   private _router = inject(Router);
-
-  searchInput = signal<string>('');
+  public searchService = inject(SearchService);
 
   navigateToSearch(): void {
     this._router.navigate(['/search'], {
-      queryParams: { q: this.searchInput() },
+      queryParams: { q: this.searchService.searchInput() },
     });
   }
 }

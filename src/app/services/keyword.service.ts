@@ -1,11 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Result } from '../interfaces/api.interfaces';
 import keyword_extractor from 'keyword-extractor';
+import { SearchService } from './search.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class KeywordService {
+  public keywords = signal<string[]>([]);
+  public keywordData = signal<{ keyword: string; count: number }[]>([]);
+  public selectedPaperKeywordData = signal<
+    { keyword: string; count: number }[]
+  >([]);
+
+  constructor(public searchService: SearchService) {}
+
+  updateKeywordChart(): void {
+    const query = this.searchService.searchInput();
+    const papers = this.searchService.results();
+
+    if (query && papers) {
+      this.keywordData.set(this.extractKeywords(papers, query));
+      this.keywords.set(this.keywordData().map((data) => data.keyword));
+    } else {
+      this.keywordData.set([]);
+      this.keywords.set([]);
+    }
+  }
+
   extractKeywords(
     papers: Result[],
     query: string
@@ -28,7 +50,7 @@ export class KeywordService {
             return text
               .split(/\s+/)
               .filter((word) =>
-                keyword.toLowerCase().includes(word.toLowerCase())
+                word.toLowerCase().includes(keyword.toLowerCase())
               );
           }
           return [];

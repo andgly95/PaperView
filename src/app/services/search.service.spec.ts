@@ -27,7 +27,7 @@ describe('SearchService', () => {
   });
 
   it('should have initial values', () => {
-    expect(searchService.searchInput()).toBe('drone');
+    expect(searchService.searchInput()).toBe('');
     expect(searchService.numPapers()).toBe(10);
     expect(searchService.results()).toEqual([]);
   });
@@ -44,7 +44,7 @@ describe('SearchService', () => {
     });
 
     expect(coreApiServiceSpy.fetchPapers).toHaveBeenCalledWith({
-      q: 'drone',
+      q: '',
       limit: 10,
     });
   });
@@ -74,6 +74,7 @@ describe('SearchService', () => {
     ];
     coreApiServiceSpy.fetchPapers.and.returnValue(of(mockResults));
 
+    searchService.searchInput.set('drone');
     searchService.numPapers.set(20);
     searchService.searchPapers().subscribe((results) => {
       expect(results).toEqual(mockResults);

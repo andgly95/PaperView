@@ -50,6 +50,11 @@ describe('SearchHeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should have a logo component', () => {
+    const logoComponent = fixture.nativeElement.querySelector('pv-logo');
+    expect(logoComponent).toBeTruthy();
+  });
+
   it('should update the search input when query params change', () => {
     const params = { q: 'test query' };
     queryParamsSubject.next(params);
@@ -79,6 +84,4 @@ describe('SearchHeaderComponent', () => {
       queryParamsHandling: 'merge',
     });
   });
-
-  // Add more test cases as needed
 });

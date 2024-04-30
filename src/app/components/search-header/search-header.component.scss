@@ -42,6 +42,10 @@
     border: none;
     border-radius: 40px;
     background-color: $accent;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     pv-search-icon {
       display: inline-flex;
       margin-left: -6px;

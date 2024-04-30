@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Result } from '../interfaces/api.interfaces';
 import { CoreApiService } from './core-api.service';
 
@@ -7,9 +7,10 @@ import { CoreApiService } from './core-api.service';
   providedIn: 'root',
 })
 export class SearchService {
-  public searchInput = signal<string>('drone');
+  public searchInput = signal<string>('');
   public numPapers = signal<number>(10);
   public results = signal<Result[]>([]);
+  public loading = signal<boolean>(false);
 
   constructor(private coreApiService: CoreApiService) {}
 
@@ -18,7 +19,13 @@ export class SearchService {
       q: this.searchInput(),
       limit: this.numPapers(),
     };
+    this.loading.set(true);
 
-    return this.coreApiService.fetchPapers(params);
+    return this.coreApiService.fetchPapers(params).pipe(
+      tap((results) => {
+        this.results.set(results);
+        this.loading.set(false);
+      })
+    );
   }
 }
